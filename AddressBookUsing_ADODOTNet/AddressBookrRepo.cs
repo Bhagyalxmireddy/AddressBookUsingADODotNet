@@ -6,11 +6,11 @@ using System.Text;
 
 namespace AddressBookUsing_ADODOTNet
 {
-     public class AddressBookrRepo
-     {
+    public class AddressBookrRepo
+    {
         public static string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Address_Book;Integrated Security=True";
         SqlConnection connection = new SqlConnection(connectionString);
-        
+
         public void RetreveTheData_FromDB()
         {
             try
@@ -47,7 +47,8 @@ namespace AddressBookUsing_ADODOTNet
                     dataReader.Close();
                     this.connection.Close();
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -55,7 +56,7 @@ namespace AddressBookUsing_ADODOTNet
             {
                 this.connection.Close();
             }
-        } 
+        }
         public bool AddPersonToDB(AddressBookModel model)
         {
             try
@@ -80,7 +81,8 @@ namespace AddressBookUsing_ADODOTNet
                     }
                     return false;
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -111,7 +113,8 @@ namespace AddressBookUsing_ADODOTNet
                         return false;
                     }
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -151,6 +154,48 @@ namespace AddressBookUsing_ADODOTNet
                 this.connection.Close();
             }
         }
+        public void RetrevingDataBased_OnCityOrState(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    string query = "spRetreveBasedOncityorstate";
+                    SqlCommand command = new SqlCommand(query, this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@City", model.City);
+                    command.Parameters.AddWithValue("@State", model.State);
+                    this.connection.Open();
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            model.FirstName = dataReader.GetString(0);
+                            model.City = dataReader.GetString(1);
+                            model.State = dataReader.GetString(2);
+                            Console.WriteLine("{0},{1},{2}",
+                                 model.FirstName, model.City, model.State);
+                            Console.WriteLine("\n");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No data found");
+                    }
+                    dataReader.Close();
+                    this.connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
 
+        }
     }
 }

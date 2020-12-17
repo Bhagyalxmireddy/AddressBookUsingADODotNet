@@ -9,7 +9,10 @@ namespace AddressBookUsing_ADODOTNet
             Console.WriteLine("Welcome to AddressBook");
             AddressBookModel model = new AddressBookModel();
             AddressBookrRepo repo = new AddressBookrRepo();
-            repo.RetreveTheData_FromDB();
+            //repo.RetreveTheData_FromDB();
+            model.City = "Mumbai";
+            model.State = "AP";
+            repo.RetrevingDataBased_OnCityOrState(model);
         }
     }
 }

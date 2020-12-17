@@ -38,5 +38,13 @@ namespace AdressBook_Test
             bool result = repo.DeletePersonFromDb(model);
             Assert.IsTrue(result);
         }
+        [TestMethod]
+        public void RetrevingPersonDetailsBasedOnCityOrState_ShouldReturnTrue()
+        {
+            model.City = "Anitha";
+            model.State = "";
+            bool result = repo.DeletePersonFromDb(model);
+            Assert.IsTrue(result);
+        }
     }
 }
