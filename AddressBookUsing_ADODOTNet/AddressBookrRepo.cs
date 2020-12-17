@@ -240,5 +240,46 @@ namespace AddressBookUsing_ADODOTNet
             }
 
         }
+        public void RetreveData_InSortedOrder(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    string query = "spRetreveDataInsortedOrder";
+                    SqlCommand command = new SqlCommand(query, this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@City", model.City);
+                    this.connection.Open();
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            model.FirstName = dataReader.GetString(0);
+                            model.City = dataReader.GetString(1);
+                            Console.WriteLine("{0},{1}",
+                                 model.FirstName, model.City);
+                            Console.WriteLine("\n");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No data found");
+                    }
+                    dataReader.Close();
+                    this.connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+
+        }
     }
 }
