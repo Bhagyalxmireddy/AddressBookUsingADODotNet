@@ -12,10 +12,11 @@ namespace AddressBookUsing_ADODOTNet
             bool i = true;
             while (i)
             {
-                Console.WriteLine("1.Retrevice All The data");
-                Console.WriteLine("2.Retrevice data based on city or state");
-                Console.WriteLine("3.Retrevice data based on city And state");
-                Console.WriteLine("4.Exit");
+                Console.WriteLine("1.Retreve All The data");
+                Console.WriteLine("2.Retreve data based on city or state");
+                Console.WriteLine("3.Retreve data based on city And state");
+                Console.WriteLine("4.Retreve data in sorted order based on firstName for givenCity");
+                Console.WriteLine("5.Exit");
                 try
                 {
                     int choice = Convert.ToInt32(Console.ReadLine());
@@ -39,6 +40,11 @@ namespace AddressBookUsing_ADODOTNet
                             repo.RetrevingDataBased_OnCityANDState(model);
                             break;
                         case 4:
+                            Console.WriteLine("Enter city name : ");
+                            model.City = Console.ReadLine();
+                            repo.RetreveData_InSortedOrder(model);
+                            break;
+                        case 5:
                             i = false;
                             break;
                         default:
