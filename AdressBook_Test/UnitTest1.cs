@@ -31,5 +31,12 @@ namespace AdressBook_Test
             bool result = repo.UpadatePersonDetails(model);
             Assert.IsTrue(result);
         }
+        [TestMethod]
+        public void DeletingPersonDetails_ShouldReturnTrue()
+        {
+            model.FirstName = "pradeepa";
+            bool result = repo.DeletePersonFromDb(model);
+            Assert.IsTrue(result);
+        }
     }
 }
