@@ -53,5 +53,14 @@ namespace AdressBook_Test
             bool result = repo.AddpersonsTypeToDB(model);
             Assert.IsTrue(result);
         }
+        [TestMethod]
+        public void AddingsamePersonTodiffTypes_ShouldReturnTrue()
+        {
+            model.ID = 1;
+            model.Relationship_ID = 3;
+            bool result = repo.AddpersonsTypeToDB(model);
+            Assert.IsTrue(result);
+        }
+
     }
 }
