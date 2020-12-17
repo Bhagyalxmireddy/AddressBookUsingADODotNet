@@ -91,6 +91,61 @@ namespace AddressBookUsing_ADODOTNet
                 this.connection.Close();
             }
         }
+        public bool AddRelationShip_TypeToDB(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand command = new SqlCommand("spAddTypes", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@RelationShip_name", model.RelationShip_name);
+                    this.connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    if (!result.Equals(0))
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
+        public bool AddpersonsTypeToDB(AddressBookModel model)
+        {
+            try
+            {
+                using (this.connection)
+                {
+                    SqlCommand command = new SqlCommand("spAddRelationTypes", this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@ID", model.ID);
+                    command.Parameters.AddWithValue("@Relationship_ID", model.Relationship_ID);
+                    this.connection.Open();
+                    var result = command.ExecuteNonQuery();
+                    if (!result.Equals(0))
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
         public bool UpadatePersonDetails(AddressBookModel model)
         {
             SqlConnection connection = new SqlConnection(connectionString);

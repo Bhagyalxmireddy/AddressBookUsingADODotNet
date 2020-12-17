@@ -39,11 +39,18 @@ namespace AdressBook_Test
             Assert.IsTrue(result);
         }
         [TestMethod]
-        public void RetrevingPersonDetailsBasedOnCityOrState_ShouldReturnTrue()
+        public void AddingTheRelationShipType_ShouldReturnTrue()
         {
-            model.City = "Anitha";
-            model.State = "";
-            bool result = repo.DeletePersonFromDb(model);
+            model.RelationShip_name = "Friends";
+            bool result = repo.AddRelationShip_TypeToDB(model);
+            Assert.IsTrue(result);
+        }
+        [TestMethod]
+        public void AddingRelationShipTypeToPerson_ShouldReturnTrue()
+        {
+            model.ID = 1;
+            model.Relationship_ID = 2;
+            bool result = repo.AddpersonsTypeToDB(model);
             Assert.IsTrue(result);
         }
     }

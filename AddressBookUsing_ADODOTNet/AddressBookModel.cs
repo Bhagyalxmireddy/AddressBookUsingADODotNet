@@ -16,6 +16,8 @@ namespace AddressBookUsing_ADODOTNet
         public string Zip { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+        public int Relationship_ID { get; set; }
+        public string RelationShip_name { get; set; }
 
     }
 }
