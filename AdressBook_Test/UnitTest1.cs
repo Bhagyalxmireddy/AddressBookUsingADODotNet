@@ -23,5 +23,13 @@ namespace AdressBook_Test
             bool result = repo.AddPersonToDB(model);
             Assert.IsTrue(result);
         }
+        [TestMethod]
+        public void UpadatingPersonDetails_ShouldReturnTrue()
+        {
+            model.FirstName = "pradeepa";
+            model.City = "HN";
+            bool result = repo.UpadatePersonDetails(model);
+            Assert.IsTrue(result);
+        }
     }
 }
