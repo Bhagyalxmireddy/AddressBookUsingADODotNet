@@ -9,7 +9,6 @@ namespace AddressBookUsing_ADODOTNet
             Console.WriteLine("Welcome to AddressBook");
             AddressBookModel model = new AddressBookModel();
             AddressBookrRepo repo = new AddressBookrRepo();
-            repo.GetCountByPersonType();
             bool i = true;
             while (i)
             {

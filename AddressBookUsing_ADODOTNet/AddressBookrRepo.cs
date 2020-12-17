@@ -211,16 +211,17 @@ namespace AddressBookUsing_ADODOTNet
         }
         public void RetrevingDataBased_OnCityOrState(AddressBookModel model)
         {
+            SqlConnection connection = new SqlConnection(connectionString);
             try
             {
-                using (this.connection)
+                using (connection)
                 {
                     string query = "spRetreveBasedOncityorstate";
-                    SqlCommand command = new SqlCommand(query, this.connection);
+                    SqlCommand command = new SqlCommand(query,connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@City", model.City);
                     command.Parameters.AddWithValue("@State", model.State);
-                    this.connection.Open();
+                    connection.Open();
                     SqlDataReader dataReader = command.ExecuteReader();
                     if (dataReader.HasRows)
                     {
@@ -256,14 +257,15 @@ namespace AddressBookUsing_ADODOTNet
         {
             try
             {
-                using (this.connection)
+                SqlConnection connection = new SqlConnection(connectionString);
+                using (connection)
                 {
                     string query = "spRetreveBasedOncityAndstate";
-                    SqlCommand command = new SqlCommand(query, this.connection);
+                    SqlCommand command = new SqlCommand(query, connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@City", model.City);
                     command.Parameters.AddWithValue("@State", model.State);
-                    this.connection.Open();
+                    connection.Open();
                     SqlDataReader dataReader = command.ExecuteReader();
                     if (dataReader.HasRows)
                     {
@@ -297,15 +299,16 @@ namespace AddressBookUsing_ADODOTNet
         }
         public void RetreveData_InSortedOrder(AddressBookModel model)
         {
+            SqlConnection connection = new SqlConnection(connectionString);
             try
             {
-                using (this.connection)
+                using (connection)
                 {
                     string query = "spRetreveDataInsortedOrder";
-                    SqlCommand command = new SqlCommand(query, this.connection);
+                    SqlCommand command = new SqlCommand(query, connection);
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.AddWithValue("@City", model.City);
-                    this.connection.Open();
+                    connection.Open();
                     SqlDataReader dataReader = command.ExecuteReader();
                     if (dataReader.HasRows)
                     {
@@ -338,15 +341,16 @@ namespace AddressBookUsing_ADODOTNet
         }
         public void GetCountByPersonType()
         {
+            SqlConnection connection = new SqlConnection(connectionString);
             try
             {
                 AddressBookModel model = new AddressBookModel();
-                using (this.connection)
+                using (connection)
                 {
                     string query = "spGetpersonsCountByType";
-                    SqlCommand command = new SqlCommand(query, this.connection);
+                    SqlCommand command = new SqlCommand(query, connection);
                     command.CommandType = CommandType.StoredProcedure;
-                    this.connection.Open();
+                    connection.Open();
                     SqlDataReader dataReader = command.ExecuteReader();
                     if (dataReader.HasRows)
                     {
