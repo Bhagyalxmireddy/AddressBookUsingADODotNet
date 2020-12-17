@@ -34,7 +34,7 @@ namespace AdressBook_Test
         [TestMethod]
         public void DeletingPersonDetails_ShouldReturnTrue()
         {
-            model.FirstName = "pradeepa";
+            model.FirstName = "Anitha";
             bool result = repo.DeletePersonFromDb(model);
             Assert.IsTrue(result);
         }
