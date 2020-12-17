@@ -336,5 +336,45 @@ namespace AddressBookUsing_ADODOTNet
             }
 
         }
+        public void GetCountByPersonType()
+        {
+            try
+            {
+                AddressBookModel model = new AddressBookModel();
+                using (this.connection)
+                {
+                    string query = "spGetpersonsCountByType";
+                    SqlCommand command = new SqlCommand(query, this.connection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    this.connection.Open();
+                    SqlDataReader dataReader = command.ExecuteReader();
+                    if (dataReader.HasRows)
+                    {
+                        while (dataReader.Read())
+                        {
+                            model.RelationShip_name = dataReader.GetString(0);
+                            model.ID = dataReader.GetInt32(1);
+                            Console.WriteLine("{0},{1}",
+                                 model.RelationShip_name,model.ID);
+                            Console.WriteLine("\n");
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No data found");
+                    }
+                    dataReader.Close();
+                    this.connection.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            finally
+            {
+                this.connection.Close();
+            }
+        }
     }
 }
